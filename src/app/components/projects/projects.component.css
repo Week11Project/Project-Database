@@ -2,3 +2,7 @@ app-project{
     margin-top: 10px;
     margin-left: 0px;
 }
+.search{
+    border-top-left-radius: 50em; /* 50% of height */
+    border-bottom-left-radius: 50em; /* 50% of height */
+}
