@@ -1,0 +1,39 @@
+<main class="page landing-page">
+    <section class="clean-block about-us">
+        <div class="container">
+            <div class="block-heading">
+                <div class="row">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h3 class="fw-bold">Projects</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- <div class="input-group"><span class="input-group-text border">Filter</span>
+                        <div style="min-width: 100px;"><select  class="label ui selection fluid dropdown" name="skills" multiple>
+                        <option value>All</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select></div></div> -->
+                    </div>
+                        <div class="col-4 offset-4">
+                            <div class="input-group"><input class="form-control form-control form-control form-control form-control" type="text"><button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <app-project 
+                            class="col-lg-4  d-flex align-items-stretch"
+                            *ngFor="let Project of Projects; let i = index"
+                            index="{{i}}"
+                            title="{{Project.title}}" 
+                            github="{{Project.github}}" 
+                            site="{{Project.site}}"
+                            skills="{{Project.skills}}"
+                            decs="{{Project.desc}}">
+                        </app-project>
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>
