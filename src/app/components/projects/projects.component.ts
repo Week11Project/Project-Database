@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
-import { GetprojectsService } from '../../services/getprojects.service';
+import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from '../../services/projects.service';
+import { Project } from '../../model/project';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   
-  Projects: any;
+  userName: string = "tektutorialshub"
+  projects: Project[] | undefined;
+ 
+  loading: boolean = false;
+  errorMessage: string | undefined;
+  
 
-  constructor() {
-    let projectsService = new GetprojectsService();
-    this.Projects=  projectsService.getData();
+  constructor(private projectsService: ProjectsService) {
   }
 
+  ngOnInit() {
+    this.projectsService.findAll().subscribe((data) => {
+      this.projects = data;
+    });
+  }
 }

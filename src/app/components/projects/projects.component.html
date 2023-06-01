@@ -9,13 +9,6 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <!-- <div class="input-group"><span class="input-group-text border">Filter</span>
-                        <div style="min-width: 100px;"><select  class="label ui selection fluid dropdown" name="skills" multiple>
-                        <option value>All</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        </select></div></div> -->
                         <app-filter></app-filter>
                     </div>
                         <div class="col-4 offset-4">
@@ -24,14 +17,10 @@
                     </div>
                     <div class="row justify-content-center">
                         <app-project 
-                            class="col-lg-4  d-flex align-items-stretch"
-                            *ngFor="let Project of Projects; let i = index"
+                            class="col-lg-4 d-flex align-items-stretch"
+                            *ngFor="let project of projects; let i = index"
                             index="{{i}}"
-                            title="{{Project.title}}" 
-                            github="{{Project.github}}" 
-                            site="{{Project.site}}"
-                            skills="{{Project.skills}}"
-                            decs="{{Project.desc}}">
+                            [project]="project">
                         </app-project>
                     </div>
                 </div>

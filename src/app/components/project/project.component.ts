@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Project } from 'src/app/model/project';
 
 @Component({
   selector: 'app-project',
@@ -6,24 +7,20 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent {
+  @Input() project!: Project;
   @Input() index : string = "";
-  @Input() title : string = "";
-  @Input() github : string = "";
-  @Input() site : string = "";  
-  @Input() skills : string = "";  
-  @Input() decs : string = "";  
   colorarr : Array<string> = ["primary", "secondary", "info"];
   color: string = "primary";
 
-  isGithubHidden : boolean = false;  
-  isSiteHidden : boolean = false; 
+  isGithubHidden : boolean = true;  
+  isSiteHidden : boolean = true; 
 
   ngOnInit() {
-    if (this.github=="") {
-      this.isGithubHidden = true;
+    if (this.project.github!="") {
+      this.isGithubHidden = false;
     }
-    if (this.site=="") {
-      this.isSiteHidden = true;
+    if (this.project.site!="") {
+      this.isSiteHidden = false;
     }
     this.color=this.colorarr[parseInt(this.index)%3]
   }
