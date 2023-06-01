@@ -1,16 +1,10 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <mat-select (openedChange)="onChange($event)" [formControl]="control" multiple>
+    <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+  </mat-select>
+</mat-form-field>
 
-<!-- 
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-
-
-<select multiple data-placeholder="Add Language">
-    <option>Javascript</option>
-    <!-- <option selected>Framer X</option> -->
-    <option>jQuery</option>
-    <option>HTML</option>
-    <option>Wordpress</option>
-    <option>PHP</option>
-</select>
+<div>
+    value selected is : {{valueSelected}}
+  </div>

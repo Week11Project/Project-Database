@@ -1,0 +1,7 @@
+.card{
+    min-width: 100%;
+    min-height: 100%;
+}
+.card-body{
+    --bs-bg-opacity: .25;
+}

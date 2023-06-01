@@ -8,6 +8,8 @@ import { map, catchError} from 'rxjs/operators';
 export class ProjectsService {
 
   projectsUrl: string = 'http://localhost:9080/projects';
+    
+  tags : Set<string> = new Set<string>();
 
   constructor(private http: HttpClient) {
   }

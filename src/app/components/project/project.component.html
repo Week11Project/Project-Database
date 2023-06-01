@@ -1,5 +1,5 @@
 
-    <div class="card text-center bg-{{color}}-light">
+    <div class="card text-center">
         <div class="card-header text-bg-{{color}}">
             <div class="row">
                 <div class="col-9" data-bs-toggle="collapse" aria-expanded="true" attr.aria-controls="collapse-{{index}}" attr.href="#collapse-{{index}}">
@@ -8,7 +8,7 @@
                 <div class="col-3"><a class="link-light" href><i class="fa fa-arrow-right"></i></a></div>
             </div>
         </div>
-        <div id="collapse-{{index}}" class="card-body info collapse show">
+        <div id="collapse-{{index}}" class="card-body info collapse show rounded-bottom bg-{{color}}-light">
             <h6 class="text-muted card-subtitle mb-2">{{project.skills}}</h6>
             <p class="card-text">{{project.description}}</p>
             <div class="row icons">
