@@ -5,6 +5,7 @@ import com.genspark.SpringBootdemoApplication.Dao.UserDao;
 import com.genspark.SpringBootdemoApplication.Entity.Project;
 import com.genspark.SpringBootdemoApplication.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserDao userDao;
+  @Autowired
+  public PasswordEncoder passwordEncoder;
 
   @Override
   public List<Users> getAllUsers() {
@@ -35,17 +38,39 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Users addUser(Users user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return this.userDao.save(user);
   }
 
   @Override
   public Users updateUser(Users user) {
+    Users userFound = null;
+    List<Users> list = this.userDao.findAll();
+
+    for(int i=0;i<list.size();i++){
+      if(list.get(i).getUsername().equals(user.getUsername())){
+        userFound=list.get(i);
+      }
+    }
+    if(userFound==null){
+      throw new RuntimeException("Username not found for username :: " + user.getUsername());
+    }
+
+    userFound.setPassword(passwordEncoder.encode(user.getPassword()));
     return this.userDao.save(user);
+
   }
 
   @Override
   public String deleteUserById(int userID) {
+    Users user = this.userDao.getById(userID);
+    if(user==null){
+      throw new RuntimeException("Username not found for username :: " + user.getUsername());
+    }
+
     this.userDao.deleteById(userID);
+
+
     return "Deleted Successfully";
   }
 
