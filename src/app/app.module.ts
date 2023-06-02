@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { ProjectsService } from './services/projects.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AddComponent } from './components/add/add.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavComponent,
     ProjectComponent,
     FooterComponent,
-    FilterComponent
+    FilterComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,

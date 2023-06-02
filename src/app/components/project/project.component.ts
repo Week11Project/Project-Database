@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from 'src/app/model/project';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +16,13 @@ export class ProjectComponent implements OnInit {
   isGithubHidden : boolean = true;  
   isSiteHidden : boolean = true; 
 
+  constructor(private projectsService: ProjectsService) {
+  }
+
   ngOnInit() {
+    
+    // console.log(this.project)
+    this.projectsService.save(this.project);
     if (this.project.github!=null) {
       this.isGithubHidden = false;
     }

@@ -1,0 +1,35 @@
+<div class="container py-5">
+    <div class="block-heading">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h3 class="fw-bold">Add Project</h3>
+            </div>
+        </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-xl-8 fill">
+            <div>
+                <form class="p-3 p-xl-4" method="post" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3"></div>
+                    <div class="row">
+                        <div class="col-md-6"><input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /></div>
+                        <div class="col-md-6">
+                            <mat-select  class="form-control" (openedChange)="onChange($event)" [formControl]="control" multiple placeholder="Tags">
+                              <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 9.6px 0 0;">
+                        <div class="col-md-6"><input id="github" formControlName="github" class="form-control" type="url" name="title" placeholder="GitHub" /></div>
+                        <div class="col-md-6"><input id="site" formControlName="site" class="form-control"  type="url" name="title" placeholder="Website" /></div>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="mb-3"><textarea id="description" formControlName="description" class="form-control" name="message" rows="6" placeholder="Project Description"></textarea></div>
+                    <div class="row">
+                        <div class="col-md-4 offset-8"><button class="btn btn-primary shadow d-block w-100" type="submit">Add Project</button></div>
+                    </div>
+                    <div></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

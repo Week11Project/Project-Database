@@ -19,6 +19,10 @@ export class ProjectsService {
   }
 
   public save(project: Project) {
-    return this.http.post<Project>(this.projectsUrl, project);
+    return this.http.post(this.projectsUrl, project)
+    .subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
+    });
   }
 }
