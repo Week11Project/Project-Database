@@ -16,6 +16,9 @@ public class SecurityConfiguration {
   public SecurityFilterChain securityFilterChain(HttpSecurity h) throws Exception{
     h.csrf().disable()
       .authorizeHttpRequests()
+      .requestMatchers("/users")
+//      .permitAll()
+      .hasAuthority("ADMIN")
       .anyRequest()// Unless specified, all url pages will fall under anyRequests(). You would need to specify the type of security such as permit all or authentication for it to work. Think firewalls where the last rules deny all packets
       .permitAll()
       .and()
