@@ -1,7 +1,9 @@
 package com.genspark.SpringBootdemoApplication.Controller;
 
 import com.genspark.SpringBootdemoApplication.Entity.Project;
+import com.genspark.SpringBootdemoApplication.Entity.Users;
 import com.genspark.SpringBootdemoApplication.Service.ProjectService;
+import com.genspark.SpringBootdemoApplication.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,8 @@ import java.util.List;
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String home(@RequestParam(value = "str", defaultValue = "Good Morning!") String str)
@@ -38,4 +42,28 @@ public class ProjectController {
     public String deleteProject(@PathVariable String projectID){
         return this.projectService.deleteProjectById(Integer.parseInt(projectID));
     }
+
+    @GetMapping("/users")
+    List<Users> getAllUsers(){
+      return this.userService.getAllUsers();
+    }
+
+    @GetMapping("/users/{userID}")
+    public Users getUserById(@PathVariable int userID){
+      return this.userService.getUserById(userID);
+    }
+
+    @PostMapping("/users")
+    public Users addUser(@RequestBody Users u){
+      return this.userService.addUser(u);
+    }
+    @PutMapping("/users")
+    public Users updateUser(@RequestBody Users user){
+      return this.userService.updateUser(user);
+    }
+    @DeleteMapping("/users/{userID}")
+    public String  deleteUserById(@PathVariable int userID){
+      return this.userService.deleteUserById(userID);
+    }
+
 }
