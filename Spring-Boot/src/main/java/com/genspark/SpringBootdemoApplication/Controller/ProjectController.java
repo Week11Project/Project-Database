@@ -22,6 +22,12 @@ public class ProjectController {
     {
         return "<HTML><H1>Welcome to Project Application</H1><HTML>"+ str;
     }
+
+    @GetMapping("/authentication")
+    public boolean login(){
+      return true;
+    }
+
     @GetMapping("/projects")
     public List<Project> getProjects(){
         return this.projectService.getAllProject();

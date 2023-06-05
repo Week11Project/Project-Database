@@ -14,8 +14,10 @@ import { ProjectComponent } from './components/project/project.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { ProjectsService } from './services/projects.service';
+import {RestapiLoginService} from './services/restapi-login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/add/add.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AddComponent } from './components/add/add.component';
     ProjectComponent,
     FooterComponent,
     FilterComponent,
-    AddComponent
+    AddComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { AddComponent } from './components/add/add.component';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ProjectsService],
+  providers: [ProjectsService, RestapiLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
