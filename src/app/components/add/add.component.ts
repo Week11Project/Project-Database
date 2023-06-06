@@ -12,8 +12,13 @@ import { FormBuilder } from '@angular/forms';
 export class AddComponent {
   @Input() tags?: string[];
   control = new FormControl();
+  
+  newTag: string ="";
 
   projectForm!: FormGroup;
+  
+  vaidTag : boolean = true;
+  tagerror : string ="";
 
 
   constructor(private projectsService: ProjectsService, private formBuilder: FormBuilder) {
@@ -26,26 +31,44 @@ export class AddComponent {
     });
     this.projectForm=this.formBuilder.group({
       title: '',
-      github: '',
-      site: '',
+      skills: '',
+      github: null,
+      site: null,
       description: ''
     });
   }
 
-  // powers = ['Really Smart', 'Super Flexible',
-  //           'Super Hot', 'Weather Changer'];
-
-  // model = new Project('Dr. IQ', 'Dr. IQ', this.powers[0], 'Chuck Overstreet','Dr. IQ');
-
-  // submitted = false;
-
   onSubmit() { 
     
     if(this.projectForm.value.title!==undefined){    
-      let body = new FormData();
-        
-        this.projectsService.save(this.projectForm.value);}
+      
+      if(this.projectForm.value.skills==""){
+        this.projectForm.value.skills=null;
+      } else {
+        console.log(this.projectForm.value.skills);
+        this.projectForm.value.skills=this.projectForm.value.skills.join(", ");
+        console.log(this.projectForm.value.skills);
+
+      }
+
+      this.projectsService.save(this.projectForm.value);}
     
+  }
+
+  addNewTag(newTag: string){
+    newTag = newTag.trim();
+    var unique = !this.tags?.some(x => x.toLowerCase() == newTag.toLowerCase());
+    // this.tags?.map((t) => { return t.toLowerCase() }).includes(newTag.toLowerCase())
+    if (unique&&newTag!=""){
+      this.vaidTag = true;
+      this.tags?.push(newTag);
+    } else if (newTag==""){
+      this.vaidTag = false;
+      this.tagerror ="Tag can not be blank."
+    } else {
+      this.vaidTag = false;
+      this.tagerror ="Tag already listed."
+    }
   }
   
   onChange(event: any){

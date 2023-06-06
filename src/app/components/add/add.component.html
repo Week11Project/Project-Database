@@ -9,15 +9,29 @@
         <div class="col-md-6 col-xl-8 fill">
             <div>
                 <form class="p-3 p-xl-4" method="post" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-                    <div class="mb-3"></div>
+                    <div class="mb-3">
                     <div class="row">
                         <div class="col-md-6"><input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /></div>
                         <div class="col-md-6">
-                            <mat-select  class="form-control" (openedChange)="onChange($event)" [formControl]="control" multiple placeholder="Tags">
+                            <mat-select id="skills" formControlName="skills"  class="form-control" [formControl]="control" multiple placeholder="Tags" #regimeWidget>
                               <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+                              
+                              <div style="margin: 9.6px; width: 90%;"><div *ngIf="!vaidTag" class="text-danger">
+                                {{tagerror}}
+                            </div>
+                              <div class="input-group"><input class="form-control" type="text" #newTag placeholder="New Tag"/><button class="btn btn-outline-primary" (click)="addNewTag(newTag.value)" type="button">Add</button></div>
+                              </div>
                             </mat-select>
                         </div>
                     </div>
+                    <!-- <ng-container *ngIf="newTag">
+                        <div  class="row" style="padding: 9.6px 0 0;">
+                            <div class="col-md-6 offset-6">
+                                <input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /> 
+                                <div class="input-group"><input class="form-control" type="text" /><button class="btn btn-primary" type="button">Add Tag</button></div>
+                            </div>
+                        </div>
+                    </ng-container> -->
                     <div class="row" style="padding: 9.6px 0 0;">
                         <div class="col-md-6"><input id="github" formControlName="github" class="form-control" type="url" name="title" placeholder="GitHub" /></div>
                         <div class="col-md-6"><input id="site" formControlName="site" class="form-control"  type="url" name="title" placeholder="Website" /></div>
@@ -27,9 +41,12 @@
                     <div class="row">
                         <div class="col-md-4 offset-8"><button class="btn btn-primary shadow d-block w-100" type="submit">Add Project</button></div>
                     </div>
-                    <div></div>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- <button mat-raised-button (click)="openDialog()">Pick one</button> -->

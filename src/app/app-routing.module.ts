@@ -11,7 +11,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 
 const routes: Routes = [
   // {path: '' , redirectTo: 'login', pathMatch: 'full'},
-  { path: 'projects', component: ProjectsComponent, data :{ id:Project, name:"Angular"}},
+  { path: 'projects', component: ProjectsComponent},
   { path: 'add', component: AddComponent },
   {path: 'login', component:LoginComponent}
 ];
