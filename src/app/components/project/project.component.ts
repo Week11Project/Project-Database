@@ -22,7 +22,6 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     
     // console.log(this.project)
-    this.projectsService.save(this.project);
     if (this.project.github!=null) {
       this.isGithubHidden = false;
     }
