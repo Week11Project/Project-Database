@@ -42,14 +42,9 @@ export class AddComponent {
     
     if(this.projectForm.value.title!==undefined){    
       
-      if(this.projectForm.value.skills==""){
-        this.projectForm.value.skills=null;
-      } else {
         console.log(this.projectForm.value.skills);
-        this.projectForm.value.skills=this.projectForm.value.skills.join(", ");
+        this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
         console.log(this.projectForm.value.skills);
-
-      }
 
       this.projectsService.save(this.projectForm.value);}
     
@@ -75,3 +70,15 @@ export class AddComponent {
     }
 
 }
+
+function skillsList(skills: string[]): any {
+  if(skills.length>1){
+    return skills.join(", ");
+  } else if(skills.length==1) {
+    return skills[0];
+  } else{
+    return null;
+  }
+        
+}
+

@@ -5,7 +5,12 @@
                 <div class="col-9" data-bs-toggle="collapse" aria-expanded="true" attr.aria-controls="collapse-{{index}}" attr.href="#collapse-{{index}}">
                     <h4>{{project.title}}</h4>
                 </div>
-                <div class="col-3"><a class="link-light" href><i class="fa fa-arrow-right"></i></a></div>
+                <ng-container *ngIf="admin">
+                    <div class="col-3 dropdown"><a class="link-light" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="bi bi-three-dots-vertical"></i></a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
+                    </div>
+                </ng-container>
+                <!-- <div class="col-3"><a class="link-light" href><i class="bi bi-three-dots-vertical"></i></a></div> -->
             </div>
         </div>
         <div id="collapse-{{index}}" class="card-body info collapse show rounded-bottom bg-{{color}}-light">

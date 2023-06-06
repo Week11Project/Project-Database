@@ -14,6 +14,7 @@ export class ProjectsComponent {
   @Input() tags?: string[];
   searchVaule : string = "";
   filterVaule : string = "";
+  admin : boolean = true;
   
 
   constructor(private projectsService: ProjectsService) {

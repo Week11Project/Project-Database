@@ -14,6 +14,7 @@
                         <div class="col-md-6"><input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /></div>
                         <div class="col-md-6">
                             <mat-select id="skills" formControlName="skills"  class="form-control" [formControl]="control" multiple placeholder="Tags" #regimeWidget>
+                              <mat-option hidden></mat-option>
                               <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
                               
                               <div style="margin: 9.6px; width: 90%;"><div *ngIf="!vaidTag" class="text-danger">

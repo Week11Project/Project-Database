@@ -20,11 +20,31 @@
                     </div>
                     <div class="row justify-content-center">
                         <app-project 
-                            class="col-lg-4 d-flex align-items-stretch"
+                            class="col-lg-4 d-flex align-items-stretch project-card"
                             *ngFor="let project of filteredProjects; let i = index"
                             index="{{i}}"
-                            [project]="project">
+                            [project]="project"
+                            [admin]=admin>
                         </app-project>
+
+                        
+                    <ng-container *ngIf="admin">
+                        <div class="col-lg-4 d-flex align-items-stretch project-card">
+                            <br>
+                            <a class="card-body text-center px-4 py-5 px-md-5 bg-primary-light rounded align-items-center d-flex justify-content-center" routerLink="/add">
+                                <svg class="bi bi-plus-lg text-primary " xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 128px;">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </ng-container>
+                    
+                        
+                        <!-- <app-project 
+                            class="col-lg-4 d-flex align-items-stretch"
+                            index="1"
+                            [project]="project">>
+                        </app-project> -->
                     </div>
                 </div>
             </div>

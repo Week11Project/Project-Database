@@ -12,6 +12,7 @@ export class ProjectComponent implements OnInit {
   @Input() index : string = "";
   colorarr : Array<string> = ["primary", "secondary", "info", "danger", "success", "warning"];
   color: string = "primary";
+  @Input() admin! : boolean;
 
   isGithubHidden : boolean = true;  
   isSiteHidden : boolean = true; 

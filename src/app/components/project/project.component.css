@@ -5,3 +5,6 @@
 .card-body{
     --bs-bg-opacity: .25;
 }
+i{
+    font-size: 125%;
+}
