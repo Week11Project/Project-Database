@@ -13,7 +13,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { ProjectComponent } from './components/project/project.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
-import { ProjectsService } from './services/projects.service';
+import { RestapiService } from './services/restapi';
 import {RestapiLoginService} from './services/restapi-login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/add/add.component';
@@ -40,7 +40,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ProjectsService, RestapiLoginService],
+  providers: [RestapiService, RestapiLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,13 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
 
 @Injectable()
-export class ProjectsService {
+export class RestapiService {
 
   projectsUrl: string = 'http://localhost:9080/projects';
     
   tags : Set<string> = new Set<string>();
+  headers:any;
 
   constructor(private http: HttpClient) {
+    
+    this.headers = new HttpHeaders({Authorization: 'Basic '+sessionStorage.getItem("headers")});
+
   }
 
   public findAll(): Observable<Project[]> {
@@ -19,7 +23,7 @@ export class ProjectsService {
   }
 
   public save(project: Project) {
-    return this.http.post(this.projectsUrl, project)
+    return this.http.post(this.projectsUrl, project, { headers: this.headers})
     .subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from 'src/app/model/project';
-import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-project',
@@ -17,7 +16,7 @@ export class ProjectComponent implements OnInit {
   isGithubHidden : boolean = true;  
   isSiteHidden : boolean = true; 
 
-  constructor(private projectsService: ProjectsService) {
+  constructor() {
   }
 
   ngOnInit() {

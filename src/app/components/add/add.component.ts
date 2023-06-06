@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Project } from 'src/app/model/project';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { RestapiService } from 'src/app/services/restapi';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -21,8 +21,8 @@ export class AddComponent {
   tagerror : string ="";
 
 
-  constructor(private projectsService: ProjectsService, private formBuilder: FormBuilder) {
-    this.projectsService.findAll().subscribe((data) => {
+  constructor(private restapiService: RestapiService, private formBuilder: FormBuilder) {
+    this.restapiService.findAll().subscribe((data) => {
       const t : Set<string> = new Set<string>();
       
       data.forEach(project => project.skills?.split(", ").forEach(s => t.add(s)));
@@ -46,7 +46,7 @@ export class AddComponent {
         this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
         console.log(this.projectForm.value.skills);
 
-      this.projectsService.save(this.projectForm.value);}
+      this.restapiService.save(this.projectForm.value);}
     
   }
 

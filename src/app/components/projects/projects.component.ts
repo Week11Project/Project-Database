@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProjectsService } from '../../services/projects.service';
+import { RestapiService } from '../../services/restapi';
 import { Project } from '../../model/project';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -17,8 +16,8 @@ export class ProjectsComponent {
   admin : boolean = true;
   
 
-  constructor(private projectsService: ProjectsService) {
-    this.projectsService.findAll().subscribe((data) => {
+  constructor(private restapiService: RestapiService) {
+    this.restapiService.findAll().subscribe((data) => {
       const t : Set<string> = new Set<string>();
 
       this.projects = data;
