@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit{
     resp.subscribe(data => {
       this.message = data;
       if(this.message){
-        this.router.navigate(["/projects"]);
+        this.router.navigate(["/main/projects"]);
       }
     });
 

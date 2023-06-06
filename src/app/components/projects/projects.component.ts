@@ -28,22 +28,6 @@ export class ProjectsComponent {
       this.tags = Array.from(t.values());
     });
   }
-    
-  // constructor() {
-  //   // this.projectsService.findAll().subscribe((data) => {
-  //     const t : Set<string> = new Set<string>();
-
-  //   //   this.projects = data;
-  //   if (this.projects !== undefined) {
-  //       this.filteredProjects = [...this.projects];
-        
-  //       this.projects?.forEach(project => project.skills?.split(", ").forEach(s => t.add(s)));
-
-  //       this.tags = Array.from(t.values());
-  //     // });
-      
-  //   }
-  // }
   
   searchProjects(value: string) {
     value=value.toLowerCase();

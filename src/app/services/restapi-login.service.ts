@@ -14,6 +14,12 @@ export class RestapiLoginService {
     sessionStorage.setItem("headers", btoa(username+":"+password));
     return this.http.get(authenticationURL, {headers, responseType: 'text' as 'json'});
   }
+  
+
+  public logout(){
+    const url:string="http://localhost:9080/logout";
+    return this.http.get(url);
+  }
 
 
     // public getUsers(){

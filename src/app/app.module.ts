@@ -18,6 +18,7 @@ import {RestapiLoginService} from './services/restapi-login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/add/add.component';
 import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginComponent } from './components/login/login.component';
     FooterComponent,
     FilterComponent,
     AddComponent,
-    LoginComponent
+    LoginComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,25 @@ import { RouterModule, Routes, provideRouter, withComponentInputBinding } from '
 import { ProjectsComponent } from './components/projects/projects.component';
 import { AddComponent } from './components/add/add.component';
 import {LoginComponent} from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
-  // {path: '' , redirectTo: 'login', pathMatch: 'full'},
-  { path: 'projects', component: ProjectsComponent},
-  { path: 'add', component: AddComponent },
-  {path: 'login', component:LoginComponent}
+  {path: '' , redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component:LoginComponent},
+  {path: 'main', redirectTo: 'main/projects'},
+  {
+    path: 'main', component:MainComponent,
+    children: [
+      {
+        path: 'projects', 
+        component: ProjectsComponent, 
+      },
+      {
+        path: 'add',
+        component: AddComponent, 
+      },
+    ],
+  }
 ];
 
 @NgModule({
