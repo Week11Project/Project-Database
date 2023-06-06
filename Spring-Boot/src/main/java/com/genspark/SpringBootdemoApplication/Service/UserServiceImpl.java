@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public Users getUserByUsername(String username){
+    return userDao.findByUsername(username);
+  }
+  @Override
   public Users addUser(Users user) {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     return this.userDao.save(user);
