@@ -20,11 +20,20 @@ export class RestapiService {
     return this.http.get<Project[]>(this.projectsUrl);
   }
 
+  public find(id:number): Observable<Project> {
+    return this.http.get<Project>(this.projectsUrl+"/"+id, { headers: this.headers});
+  }
+
+
   public save(project: Project) {
     return this.http.post(this.projectsUrl, project, { headers: this.headers});
   }
 
   public delete(id:number) {
     return this.http.delete(this.projectsUrl+"/"+id, { headers: this.headers, responseType: 'text'});
+  }
+
+  public update(project: Project, id:number) {
+    return this.http.put(this.projectsUrl, project, { headers: this.headers});
   }
 }

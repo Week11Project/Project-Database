@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class Project {
-    id?: number = 0;
+    id: number = 0;
     title: string = "";
     github: string = "";
     site: string = "";
@@ -17,5 +17,8 @@ export class Project {
     //     this.skills = skills;
     //     this.description = description;
     // }
+    set setid(id:number){
+        this.id = id;
+    }
 
 }

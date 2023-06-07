@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/project';
 import { RestapiService } from 'src/app/services/restapi';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -12,6 +13,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AddComponent {
   @Input() tags?: string[];
   control = new FormControl();
+
+  add:string = "Add";
+  editing: boolean = false;
+  editid:any;
   
   newTag: string ="";
 
@@ -23,7 +28,7 @@ export class AddComponent {
 
 
   
-  constructor(private restapiService: RestapiService, public snackBar: MatSnackBar) {
+  constructor(private restapiService: RestapiService, public snackBar: MatSnackBar, private route: ActivatedRoute) {
     this.restapiService.findAll().subscribe((data) => {
       const t : Set<string> = new Set<string>();
       
@@ -33,6 +38,11 @@ export class AddComponent {
     });
     const urlreg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
+    this.editid = this.route.snapshot.paramMap.get('id');
+    if(this.editid!==null){
+      this.editing =true;
+      this.edit();
+    }
     
     this.projectForm = new FormGroup({
       title: new FormControl(this.p?.title, [
@@ -52,16 +62,44 @@ export class AddComponent {
   get title(): any { return this.projectForm.get('title');}
   get github(): any { return this.projectForm.get('github');}
   get site(): any { return this.projectForm.get('site');}
+  
+
+  edit():void{
+    this.add ="Edit";
+
+    this.restapiService.find(this.editid).subscribe({
+      next: (response) => 
+      this.projectForm.patchValue({
+        title: response.title,
+        skills: response.skills.split(", "),
+        github: response.github,
+        site: response.site,
+        description: response.description
+      }),
+      error: (error) => console.log(error),
+    });
+  }
 
   onSubmit() { 
     if(this.projectForm.value!==undefined){    
-      
+      if(this.projectForm.value.skills instanceof Array){   
         this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
+      }
 
-      this.restapiService.save(this.projectForm.value).subscribe({
-        next: (response) => this.openSnackBar("Project posted successfully"),
-        error: (error) => this.openSnackBar("Project posted failed"),
-      });
+        this.projectForm.value.id= this.editid;
+        console.log(this.projectForm.value);
+
+      if(this.editing){ 
+            this.restapiService.update(this.projectForm.value, this.editid).subscribe({
+            next: (response) => this.openSnackBar("Project edit successfully"),
+            error: (error) => this.openSnackBar("Project edit failed"),
+          });
+        } else {
+          this.restapiService.save(this.projectForm.value).subscribe({
+            next: (response) => this.openSnackBar("Project posted successfully"),
+            error: (error) => this.openSnackBar("Project posted failed"),
+          });
+        }
     }
   }
 

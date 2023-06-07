@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Project } from 'src/app/model/project';
 import { RestapiService } from 'src/app/services/restapi';
 
@@ -19,7 +20,7 @@ export class ProjectComponent implements OnInit {
   isSiteHidden : boolean = true; 
   isCardHidden : string = ""; 
 
-  constructor(private restapiService: RestapiService, private snackBar: MatSnackBar) {}
+  constructor(private restapiService: RestapiService, private snackBar: MatSnackBar,private router: Router) {}
 
   ngOnInit() {
     
@@ -42,6 +43,24 @@ export class ProjectComponent implements OnInit {
     }
     
     this.isCardHidden = "deleted";
+  }
+  updateProject(){
+    if(this.project.id !== undefined){
+      
+      // this.restapiService.find(this.project.id).subscribe({
+      //   next: (response) => console.log(response),
+      //   error: (error) => console.log(error),
+      // });
+
+      this.router.navigate(["/main/edit/"+this.project.id]);
+    }
+    //   this.restapiService.update(this.project.id).subscribe({
+    //     next: (response) => this.openSnackBar(this.project.title+" deleted successfully"),
+    //     error: (error) => this.openSnackBar(this.project.title+" deleted failed"),
+    //   });
+    // }
+    
+    // this.isCardHidden = "deleted";
   }
   
   openSnackBar(message: string) {

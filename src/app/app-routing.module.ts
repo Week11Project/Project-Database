@@ -20,6 +20,11 @@ const routes: Routes = [
         path: 'add',
         component: AddComponent, 
       },
+      {
+        path: 'edit/:id',
+        component: AddComponent, 
+      },
+      
     ],
   }
 ];
