@@ -32,6 +32,10 @@ public class ProjectController {
     public List<Project> getProjects(){
         return this.projectService.getAllProject();
     }
+    @GetMapping("/{userID}/projects")
+    public List<Project> getProjectsByID(@PathVariable String userID){
+      return this.projectService.findAllByUid(Integer.parseInt(userID));
+    }
     @GetMapping("/projects/{projectID}")
     public Project getProject(@PathVariable String projectID){
         return this.projectService.getProjectById(Integer.parseInt(projectID));
@@ -54,11 +58,14 @@ public class ProjectController {
       return this.userService.getAllUsers();
     }
 
-    @GetMapping("/users/{userID}")
-    public Users getUserById(@PathVariable int userID){
-      return this.userService.getUserById(userID);
+//    @GetMapping("/users/{userID}")
+//    public Users getUserById(@PathVariable int userID){
+//      return this.userService.getUserById(userID);
+//    }
+    @GetMapping("/users/{username}")
+    public Users getUserByUsername(@PathVariable String username){
+      return this.userService.getUserByUsername(username);
     }
-
     @PostMapping("/users")
     public Users addUser(@RequestBody Users u){
       return this.userService.addUser(u);

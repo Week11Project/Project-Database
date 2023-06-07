@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RestapiService } from '../../services/restapi';
 import { Project } from '../../model/project';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -13,11 +14,17 @@ export class ProjectsComponent {
   @Input() tags?: string[];
   searchVaule : string = "";
   filterVaule : string = "";
-  admin : boolean = true;
+  admin : boolean = false;
+  userid!:any;
   
 
-  constructor(private restapiService: RestapiService) {
-    this.restapiService.findAll().subscribe((data) => {
+  constructor(private restapiService: RestapiService, private route: ActivatedRoute,private router: Router) {
+    
+    const routeid = this.route.snapshot.paramMap.get('userid');
+    
+    this.userid = sessionStorage.getItem("userid");
+
+    this.restapiService.findAll(routeid).subscribe((data) => {
       const t : Set<string> = new Set<string>();
 
       this.projects = data;
@@ -27,6 +34,9 @@ export class ProjectsComponent {
 
       this.tags = Array.from(t.values());
     });
+    if(this.userid==routeid){
+      this.admin = true;
+    }
   }
   
   searchProjects(value: string) {
@@ -48,5 +58,9 @@ export class ProjectsComponent {
         this.filteredProjects = [...this.projects];
       }
     }
+  }
+  
+  addPage(){
+    this.router.navigate(["/main/"+this.userid+"/add"]);
   }
 }

@@ -7,30 +7,33 @@ import { map, catchError} from 'rxjs/operators';
 @Injectable()
 export class RestapiService {
 
-  projectsUrl: string = 'http://localhost:9080/projects';
+  projectsUrl: string = 'http://localhost:9080/';
     
   tags : Set<string> = new Set<string>();
   headers:any;
+  userid:any;
 
   constructor(private http: HttpClient) {
+    this.userid =sessionStorage.getItem("userid");
+
     this.headers = new HttpHeaders({Authorization: 'Basic '+sessionStorage.getItem("headers")});
   }
 
-  public findAll(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectsUrl);
+  public findAll(id: string | null | undefined): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projectsUrl+id+'/projects');
   }
 
   public find(id:number): Observable<Project> {
-    return this.http.get<Project>(this.projectsUrl+"/"+id, { headers: this.headers});
+    return this.http.get<Project>(this.projectsUrl+"/projects/"+id, { headers: this.headers});
   }
 
 
   public save(project: Project) {
-    return this.http.post(this.projectsUrl, project, { headers: this.headers});
+    return this.http.post(this.projectsUrl+"projects", project, { headers: this.headers});
   }
 
   public delete(id:number) {
-    return this.http.delete(this.projectsUrl+"/"+id, { headers: this.headers, responseType: 'text'});
+    return this.http.delete(this.projectsUrl+"/projects/"+id, { headers: this.headers, responseType: 'text'});
   }
 
   public update(project: Project, id:number) {

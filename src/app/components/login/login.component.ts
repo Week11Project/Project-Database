@@ -38,13 +38,20 @@ export class LoginComponent implements OnInit{
 
   }
 
-  doLogin(){
+  async doLogin(){
     let resp = this.service.login(this.loginForm.value);
     resp.subscribe({
-      next: () => this.router.navigate(["/main/projects"]),
+      next: async () => {
+        var userid = await this.service.userid(this.loginForm.value.username);
+
+        sessionStorage.setItem("userid", userid);
+
+        this.router.navigate(["/main/projects/"+userid]);
+      },
       error: (error) =>  this.failed = true
     });
 
+    
   }
 
 }

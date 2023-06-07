@@ -20,7 +20,6 @@ constructor(private service: RestapiLoginService, private router: Router){
 }
 logout() {
   this.loggedin=false;
-  sessionStorage.removeItem("headers");
   this.service.logout();
   this.router.navigate(["/login"]);
 }

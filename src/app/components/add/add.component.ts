@@ -17,6 +17,7 @@ export class AddComponent {
   add:string = "Add";
   editing: boolean = false;
   editid:any;
+  userid!:any;
   
   newTag: string ="";
 
@@ -29,7 +30,9 @@ export class AddComponent {
 
   
   constructor(private restapiService: RestapiService, public snackBar: MatSnackBar, private route: ActivatedRoute) {
-    this.restapiService.findAll().subscribe((data) => {
+    this.userid = sessionStorage.getItem("userid");
+
+    this.restapiService.findAll(this.userid).subscribe((data) => {
       const t : Set<string> = new Set<string>();
       
       data.forEach(project => project.skills?.split(", ").forEach(s => t.add(s)));
@@ -38,8 +41,8 @@ export class AddComponent {
     });
     const urlreg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
-    this.editid = this.route.snapshot.paramMap.get('id');
-    if(this.editid!==null){
+    console.log(this.editid);
+    if(this.editid!==undefined){
       this.editing =true;
       this.edit();
     }
@@ -71,7 +74,7 @@ export class AddComponent {
       next: (response) => 
       this.projectForm.patchValue({
         title: response.title,
-        skills: response.skills.split(", "),
+        skills: skillEdit(response.skills),
         github: response.github,
         site: response.site,
         description: response.description
@@ -87,6 +90,7 @@ export class AddComponent {
       }
 
         this.projectForm.value.id= this.editid;
+        this.projectForm.value.uid= this.userid;
         console.log(this.projectForm.value);
 
       if(this.editing){ 
@@ -99,7 +103,7 @@ export class AddComponent {
             next: (response) => this.openSnackBar("Project posted successfully"),
             error: (error) => this.openSnackBar("Project posted failed"),
           });
-        }
+        }        
     }
   }
 
@@ -139,5 +143,14 @@ function skillsList(skills: string[]): any {
     }
   }
         
+}
+
+function skillEdit(skills: string ): string[] {
+    
+  if(skills !==null){  
+    return skills.split(", ");
+  }
+  return [];
+ 
 }
 

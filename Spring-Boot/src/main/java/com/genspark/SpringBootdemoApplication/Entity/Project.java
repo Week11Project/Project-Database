@@ -9,6 +9,7 @@ public class Project {
     @Column(name="p_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private int uid;
     private String title;
     private String github;
     private String site;
@@ -18,9 +19,10 @@ public class Project {
     public Project() {
     }
 
-    public Project(int id, String title, String github, String site, String skills, String description) {
+    public Project(int id, int uid, String title, String github, String site, String skills, String description) {
         this.id = id;
-        this.title = title;
+      this.uid = uid;
+      this.title = title;
         this.github = github;
         this.site = site;
         this.skills = skills;
@@ -74,4 +76,12 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+
+  public int getUid() {
+    return uid;
+  }
+
+  public void setUid(int uid) {
+    this.uid = uid;
+  }
 }

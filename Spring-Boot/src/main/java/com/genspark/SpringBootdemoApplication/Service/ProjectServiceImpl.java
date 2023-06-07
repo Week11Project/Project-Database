@@ -17,6 +17,10 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getAllProject() {
         return this.projectDeo.findAll();
     }
+    @Override
+    public List<Project> findAllByUid(int userID) {
+      return this.projectDeo.findAllByUid(userID);
+    }
 
     @Override
     public Project getProjectById(int projectID) {

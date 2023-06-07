@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class Project {
     id: number = 0;
+    user_id: string = "";
     title: string = "";
     github: string = "";
     site: string = "";

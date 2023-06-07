@@ -13,15 +13,15 @@ const routes: Routes = [
     path: 'main', component:MainComponent,
     children: [
       {
-        path: 'projects', 
+        path: 'projects/:userid', 
         component: ProjectsComponent, 
       },
       {
-        path: 'add',
+        path: ':userid/add',
         component: AddComponent, 
       },
       {
-        path: 'edit/:id',
+        path: 'edit/:projectid',
         component: AddComponent, 
       },
       
