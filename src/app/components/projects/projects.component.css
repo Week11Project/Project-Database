@@ -7,3 +7,6 @@
     border-top-left-radius: 50em;
     border-bottom-left-radius: 50em;
 }
+.project-card > .deleted{
+    display: none;
+}

@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/add/add.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MainComponent } from './components/main/main.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [RestapiService, RestapiLoginService],
   bootstrap: [AppComponent]

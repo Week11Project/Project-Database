@@ -13,9 +13,7 @@ export class RestapiService {
   headers:any;
 
   constructor(private http: HttpClient) {
-    
     this.headers = new HttpHeaders({Authorization: 'Basic '+sessionStorage.getItem("headers")});
-
   }
 
   public findAll(): Observable<Project[]> {
@@ -23,10 +21,10 @@ export class RestapiService {
   }
 
   public save(project: Project) {
-    return this.http.post(this.projectsUrl, project, { headers: this.headers})
-    .subscribe({
-      next: (response) => console.log(response),
-      error: (error) => console.log(error),
-    });
+    return this.http.post(this.projectsUrl, project, { headers: this.headers});
+  }
+
+  public delete(id:number) {
+    return this.http.delete(this.projectsUrl+"/"+id, { headers: this.headers, responseType: 'text'});
   }
 }

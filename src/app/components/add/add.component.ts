@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/project';
 import { RestapiService } from 'src/app/services/restapi';
-import { FormBuilder } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add',
@@ -22,7 +22,8 @@ export class AddComponent {
   p: Project | undefined;
 
 
-  constructor(private restapiService: RestapiService, private formBuilder: FormBuilder) {
+  
+  constructor(private restapiService: RestapiService, public snackBar: MatSnackBar) {
     this.restapiService.findAll().subscribe((data) => {
       const t : Set<string> = new Set<string>();
       
@@ -53,13 +54,21 @@ export class AddComponent {
   get site(): any { return this.projectForm.get('site');}
 
   onSubmit() { 
-    
     if(this.projectForm.value!==undefined){    
       
         this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
 
-      this.restapiService.save(this.projectForm.value);}
-    
+      this.restapiService.save(this.projectForm.value).subscribe({
+        next: (response) => this.openSnackBar("Project posted successfully"),
+        error: (error) => this.openSnackBar("Project posted failed"),
+      });
+    }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, "OK", {
+      duration: 2000,
+    });
   }
 
   addNewTag(newTag: string){
@@ -77,9 +86,6 @@ export class AddComponent {
       this.tagerror ="Tag already listed."
     }
   }
-  
-  onChange(event: any){
-    }
 
 }
 

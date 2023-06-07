@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Project } from 'src/app/model/project';
+import { RestapiService } from 'src/app/services/restapi';
 
 @Component({
   selector: 'app-project',
@@ -15,9 +17,9 @@ export class ProjectComponent implements OnInit {
 
   isGithubHidden : boolean = true;  
   isSiteHidden : boolean = true; 
+  isCardHidden : string = ""; 
 
-  constructor() {
-  }
+  constructor(private restapiService: RestapiService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     
@@ -29,6 +31,23 @@ export class ProjectComponent implements OnInit {
       this.isSiteHidden = false;
     }
     this.color=this.colorarr[parseInt(this.index)%3]
+  }
+
+  deleteProject(){
+    if(this.project.id !== undefined){
+      this.restapiService.delete(this.project.id).subscribe({
+        next: (response) => this.openSnackBar(this.project.title+" deleted successfully"),
+        error: (error) => this.openSnackBar(this.project.title+" deleted failed"),
+      });
+    }
+    
+    this.isCardHidden = "deleted";
+  }
+  
+  openSnackBar(message: string) {
+    this.snackBar.open(message, "OK", {
+      duration: 2000,
+    });
   }
 }
 

@@ -21,7 +21,7 @@
                     <div class="row justify-content-center">
                         <app-project 
                             class="col-lg-4 d-flex align-items-stretch project-card"
-                            *ngFor="let project of filteredProjects; let i = index"
+                            *ngFor="let project of filteredProjects; let i = index;"
                             index="{{i}}"
                             [project]="project"
                             [admin]=admin>
