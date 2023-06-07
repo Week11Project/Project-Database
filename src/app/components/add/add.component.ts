@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/project';
 import { RestapiService } from 'src/app/services/restapi';
 import { FormBuilder } from '@angular/forms';
@@ -19,6 +19,7 @@ export class AddComponent {
   
   vaidTag : boolean = true;
   tagerror : string ="";
+  p: Project | undefined;
 
 
   constructor(private restapiService: RestapiService, private formBuilder: FormBuilder) {
@@ -29,22 +30,33 @@ export class AddComponent {
 
       this.tags = Array.from(t.values());
     });
-    this.projectForm=this.formBuilder.group({
-      title: '',
-      skills: '',
-      github: null,
-      site: null,
-      description: ''
+    const urlreg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
+    
+    this.projectForm = new FormGroup({
+      title: new FormControl(this.p?.title, [
+        Validators.required
+      ]),
+      skills: new FormControl(this.p?.skills),
+      github: new FormControl(this.p?.github, [
+        Validators.pattern(urlreg)
+      ]),
+      site: new FormControl(this.p?.site, [
+        Validators.pattern(urlreg)
+      ]),
+      description: new FormControl(this.p?.title)
     });
   }
 
+  get title(): any { return this.projectForm.get('title');}
+  get github(): any { return this.projectForm.get('github');}
+  get site(): any { return this.projectForm.get('site');}
+
   onSubmit() { 
     
-    if(this.projectForm.value.title!==undefined){    
+    if(this.projectForm.value!==undefined){    
       
-        console.log(this.projectForm.value.skills);
         this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
-        console.log(this.projectForm.value.skills);
 
       this.restapiService.save(this.projectForm.value);}
     
@@ -53,7 +65,7 @@ export class AddComponent {
   addNewTag(newTag: string){
     newTag = newTag.trim();
     var unique = !this.tags?.some(x => x.toLowerCase() == newTag.toLowerCase());
-    // this.tags?.map((t) => { return t.toLowerCase() }).includes(newTag.toLowerCase())
+    
     if (unique&&newTag!=""){
       this.vaidTag = true;
       this.tags?.push(newTag);
@@ -72,12 +84,15 @@ export class AddComponent {
 }
 
 function skillsList(skills: string[]): any {
-  if(skills.length>1){
-    return skills.join(", ");
-  } else if(skills.length==1) {
-    return skills[0];
-  } else{
-    return null;
+
+  if(skills!=null){
+    if(skills.length>1){
+      return skills.join(", ");
+    } else if(skills.length==1) {
+      return skills[0];
+    } else{
+      return null;
+    }
   }
         
 }

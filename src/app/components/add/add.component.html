@@ -11,7 +11,7 @@
                 <form class="p-3 p-xl-4" method="post" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                     <div class="row">
-                        <div class="col-md-6"><input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /></div>
+                        <div class="col-md-6"><input id="title" formControlName="title" class="form-control" type="text" name="title" required placeholder="Project Name" /></div>
                         <div class="col-md-6">
                             <mat-select id="skills" formControlName="skills"  class="form-control" [formControl]="control" multiple placeholder="Tags" #regimeWidget>
                               <mat-option hidden></mat-option>
@@ -25,22 +25,29 @@
                             </mat-select>
                         </div>
                     </div>
-                    <!-- <ng-container *ngIf="newTag">
-                        <div  class="row" style="padding: 9.6px 0 0;">
-                            <div class="col-md-6 offset-6">
-                                <input id="title" formControlName="title" class="form-control" type="text" name="title" placeholder="Project Name" /> 
-                                <div class="input-group"><input class="form-control" type="text" /><button class="btn btn-primary" type="button">Add Tag</button></div>
-                            </div>
-                        </div>
-                    </ng-container> -->
                     <div class="row" style="padding: 9.6px 0 0;">
-                        <div class="col-md-6"><input id="github" formControlName="github" class="form-control" type="url" name="title" placeholder="GitHub" /></div>
-                        <div class="col-md-6"><input id="site" formControlName="site" class="form-control"  type="url" name="title" placeholder="Website" /></div>
+                        <div class="col-md-6"><input id="github" formControlName="github" class="form-control" type="url" name="github" placeholder="GitHub" /></div>
+                        <div class="col-md-6"><input id="site" formControlName="site" class="form-control"  type="url" name="site" placeholder="Website" /></div>
                     </div>
                     <div class="mb-3"></div>
                     <div class="mb-3"><textarea id="description" formControlName="description" class="form-control" name="message" rows="6" placeholder="Project Description"></textarea></div>
+                    
+
+                    <div *ngIf="title.invalid && title.touched" class="alert alert-danger">
+                
+                        <div *ngIf="title.errors?.['required']">
+                            Title is required.
+                        </div>
+                        <div *ngIf="github.invalid">
+                            github is required.
+                        </div>
+                        <div *ngIf="site.invalid">
+                            site is required.
+                        </div>
+                    </div>
+
                     <div class="row">
-                        <div class="col-md-4 offset-8"><button class="btn btn-primary shadow d-block w-100" type="submit">Add Project</button></div>
+                        <div class="col-md-4 offset-8"><button class="btn btn-primary shadow d-block w-100" [disabled]="projectForm.invalid" type="submit">Add Project</button></div>
                     </div>
                 </div>
                 </form>
