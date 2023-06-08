@@ -1,6 +1,3 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <mat-select (openedChange)="onChange($event)" [formControl]="control" multiple>
-    <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
-  </mat-select>
-</mat-form-field>
+<mat-select (openedChange)="onChange($event)" class="form-control" [formControl]="control" placeholder="Filter" multiple>
+  <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+</mat-select>

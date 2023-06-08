@@ -10,3 +10,11 @@
 .project-card > .deleted{
     display: none;
 }
+.add-icon{
+    font-size: 7em;
+    border: 5px solid #3763f4;
+}
+
+.add-icon:hover{
+    opacity: 0.7;
+}
