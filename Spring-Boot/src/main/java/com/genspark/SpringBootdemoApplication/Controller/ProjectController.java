@@ -64,10 +64,12 @@ public class ProjectController {
 //    }
     @GetMapping("/users/{username}")
     public Users getUserByUsername(@PathVariable String username){
+      //If there is no username present, the value return null
       return this.userService.getUserByUsername(username);
     }
     @PostMapping("/users")
     public Users addUser(@RequestBody Users u){
+      System.out.println("ADDING USER: "+u.toString());
       return this.userService.addUser(u);
     }
     @PutMapping("/users")
