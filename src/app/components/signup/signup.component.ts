@@ -14,27 +14,54 @@ export class SignupComponent implements OnInit {
 
   username: string = "";
   password: string = "";
+  confirmPassword: string = "";
 
   /** The ! means that the signupForm variable is not null*/
   signupForm!: FormGroup;
 
   message: any ="";
   failed: boolean = false;
+  
+  passwordMatch: boolean = true;
 
   constructor(private service: RestapiService, private router: Router, private formBuilder: FormBuilder){
     this.signupForm = new FormGroup({
         username: new FormControl(this.username, [Validators.required]),
-        password: new FormControl(this.password, [Validators.required])
+        password: new FormControl(this.password, [Validators.required]),
+        confirmPassword: new FormControl(this.confirmPassword, [Validators.required])
       });
   }
 
 
   get u(): any { return this.signupForm.get('username');}
   get p(): any { return this.signupForm.get('password');}
+  get cp(): any { return this.signupForm.get('confirmPassword');}
 
 
   ngOnInit(){
 
+  }
+  checkUsername(){
+    console.log(this.signupForm.controls['username'].value);
+    
+    let resp = this.service.getUser(this.signupForm.controls['username'].value);
+    resp.subscribe(x =>{
+      if(x.username=== this.signupForm.controls['username'].value){
+        this.failed=true;
+        console.log("Already Exists");
+      }else{
+        this.failed=false;
+      }
+    });
+  }
+  
+  checkPassword(){
+    this.passwordMatch = this.signupForm.value.password===this.signupForm.value.confirmPassword;
+    console.log(this.passwordMatch);
+    
+    // this.signupForm.controls['confirmPassword'].setErrors({'incorrect': !this.passwordMatch});
+    // this.signupForm.controls['password'].setErrors({'incorrect': !this.passwordMatch});
+    
   }
 
   addUser(){
@@ -43,6 +70,7 @@ export class SignupComponent implements OnInit {
       if(x.username=== this.signupForm.controls['username'].value){
         console.log("Already Exists");
       }else{
+        this.failed=false;
         if(this.signupForm.controls['password'].value != ""){
           //In order for the service to work and actually save the values, I've got to have an subscribe
           let rep = this.service.addUser(this.signupForm.value);
@@ -57,9 +85,7 @@ export class SignupComponent implements OnInit {
           console.log("Password required")
         }
       }
-    }
-
-    )
+    });
   }
 
 

@@ -14,7 +14,7 @@
                             </svg></div>
                             <form class="text-center" method="post" [formGroup]="loginForm" (ngSubmit)="doLogin()">
 
-                                <div class="mb-3"><input class="form-control" type="username" name="username" formControlName="username"  placeholder="Username" required></div>
+                                <div class="mb-3"><input class="form-control" type="username" name="username" formControlName="username" placeholder="Username" required></div>
                                 
                                 <div class="mb-3"><input class="form-control" type="password" name="password" formControlName="password" placeholder="Password" required></div>
                                 <div *ngIf="(loginForm.invalid&&(u.touched||p.touched)) || failed" class="alert alert-danger" role="alert">
