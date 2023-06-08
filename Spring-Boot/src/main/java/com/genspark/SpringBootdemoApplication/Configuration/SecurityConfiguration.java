@@ -21,9 +21,7 @@ public class SecurityConfiguration {
     h.cors();
     h.csrf().disable()
       .authorizeHttpRequests()
-      .requestMatchers(HttpMethod.GET, "/projects","/{userid}/projects","/users","/users/{username}")
-      .permitAll()
-      .requestMatchers(HttpMethod.POST, "/users")
+      .requestMatchers(HttpMethod.GET, "/projects","/{userid}/projects","/users")
       .permitAll()
 //      .requestMatchers("/users")
 ////      .permitAll()
