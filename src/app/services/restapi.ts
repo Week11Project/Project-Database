@@ -9,7 +9,7 @@ import { map, catchError} from 'rxjs/operators';
 export class RestapiService {
 
   projectsUrl: string = 'http://localhost:9080/';
-    
+
   tags : Set<string> = new Set<string>();
   headers:any;
   userid:any;
@@ -23,7 +23,7 @@ export class RestapiService {
   public findAll(id: string | null | undefined): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectsUrl+id+'/projects');
   }
-  
+
   public findAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.projectsUrl+'users');
   }
@@ -43,5 +43,19 @@ export class RestapiService {
 
   public update(project: Project, id:number) {
     return this.http.put(this.projectsUrl+"projects", project, { headers: this.headers});
+  }
+
+  public getUser(user: String){
+    return this.http.get<User>(this.projectsUrl+"users/"+user);
+  }
+  public addUser(user:User){
+    user.role="NORMAL";
+    console.log("ADDING USER");
+
+    let head = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.post("http://localhost:9080/users", user, {headers: head});
   }
 }
