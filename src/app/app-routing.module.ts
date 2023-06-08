@@ -5,31 +5,33 @@ import { AddComponent } from './components/add/add.component';
 import {LoginComponent} from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { UsersComponent } from './components/users/users.component';
+import {SignupComponent} from './components/signup/signup.component';
 
 const routes: Routes = [
   {path: '' , redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component:LoginComponent},
   {path: 'home', redirectTo: 'main/home'},
+  {path: 'signup', component: SignupComponent},
   {
     path: 'main', component:MainComponent,
     children: [
       {
-        path: 'home', 
-        component: UsersComponent, 
+        path: 'home',
+        component: UsersComponent,
       },
       {
-        path: 'projects/:userid', 
-        component: ProjectsComponent, 
+        path: 'projects/:userid',
+        component: ProjectsComponent,
       },
       {
         path: 'add',
-        component: AddComponent, 
+        component: AddComponent,
       },
       {
         path: 'edit/:projectid',
-        component: AddComponent, 
+        component: AddComponent,
       },
-      
+
     ],
   }
 ];
