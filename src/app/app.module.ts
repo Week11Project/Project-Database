@@ -4,6 +4,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/add/add.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserComponent } from './components/user/user.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FilterComponent,
     AddComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

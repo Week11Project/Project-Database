@@ -47,7 +47,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 offset-8"><button class="btn btn-primary shadow d-block w-100" [disabled]="projectForm.invalid" type="submit">{{add}} Project</button></div>
+                        <div class="col-md-4"><button class="btn btn-primary shadow d-block w-100"  routerLink="/main/projects/{{userid}}" type="button">Back to Dashboard</button></div>
+                    
+                        <div class="col-md-4 offset-4"><button class="btn btn-primary shadow d-block w-100" [disabled]="projectForm.invalid" type="submit">{{add}} Project</button></div>
                     </div>
                 </div>
                 </form>

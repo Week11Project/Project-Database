@@ -1,0 +1,12 @@
+
+.project-card{
+    margin-top: 10px;
+    margin-left: 0px;
+}
+.search{
+    border-top-left-radius: 50em;
+    border-bottom-left-radius: 50em;
+}
+.project-card > .deleted{
+    display: none;
+}

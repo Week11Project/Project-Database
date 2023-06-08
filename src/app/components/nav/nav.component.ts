@@ -8,12 +8,15 @@ import { RestapiLoginService } from 'src/app/services/restapi-login.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-headers!: string;
+headers!: string | null;
+userid: string | null;
 loggedin: boolean | undefined;
 
 constructor(private service: RestapiLoginService, private router: Router){
-  sessionStorage.getItem("headers");
-  if(sessionStorage.getItem("headers") != null){
+  this.headers = sessionStorage.getItem("headers");
+  this.userid = sessionStorage.getItem("userid");
+
+  if(this.headers != null){
     this.loggedin=true;
 
   }

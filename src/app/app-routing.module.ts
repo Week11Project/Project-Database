@@ -4,20 +4,25 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { AddComponent } from './components/add/add.component';
 import {LoginComponent} from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {path: '' , redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component:LoginComponent},
-  {path: 'main', redirectTo: 'main/projects'},
+  {path: 'home', redirectTo: 'main/home'},
   {
     path: 'main', component:MainComponent,
     children: [
+      {
+        path: 'home', 
+        component: UsersComponent, 
+      },
       {
         path: 'projects/:userid', 
         component: ProjectsComponent, 
       },
       {
-        path: ':userid/add',
+        path: 'add',
         component: AddComponent, 
       },
       {

@@ -1,0 +1,26 @@
+<main class="page landing-page">
+    <section class="clean-block about-us">
+        <div class="container">
+            <div class="block-heading">
+                <div class="row">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h3 class="fw-bold">Users</h3>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-4 offset-8">
+                            <div class="input-group"><input class="form-control" type="text"  #search (keyup.enter)="searchUsers(search.value)" placeholder="Search"/><button class="btn btn-primary" type="button" (click)="searchUsers(search.value)"><i class="fa fa-search"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <app-user 
+                            class="col-lg-4 d-flex align-items-stretch project-card"
+                            *ngFor="let user of filteredUsers; let i = index;"
+                            index="{{i}}"
+                            [user]="user">
+                        </app-user>
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Project } from '../model/project';
+import { User } from '../model/user';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
 
@@ -22,9 +23,13 @@ export class RestapiService {
   public findAll(id: string | null | undefined): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectsUrl+id+'/projects');
   }
+  
+  public findAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.projectsUrl+'users');
+  }
 
   public find(id:number): Observable<Project> {
-    return this.http.get<Project>(this.projectsUrl+"/projects/"+id, { headers: this.headers});
+    return this.http.get<Project>(this.projectsUrl+"projects/"+id, { headers: this.headers});
   }
 
 
@@ -33,10 +38,10 @@ export class RestapiService {
   }
 
   public delete(id:number) {
-    return this.http.delete(this.projectsUrl+"/projects/"+id, { headers: this.headers, responseType: 'text'});
+    return this.http.delete(this.projectsUrl+"projects/"+id, { headers: this.headers, responseType: 'text'});
   }
 
   public update(project: Project, id:number) {
-    return this.http.put(this.projectsUrl, project, { headers: this.headers});
+    return this.http.put(this.projectsUrl+"projects", project, { headers: this.headers});
   }
 }

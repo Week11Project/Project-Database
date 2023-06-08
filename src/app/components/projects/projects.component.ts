@@ -59,8 +59,4 @@ export class ProjectsComponent {
       }
     }
   }
-  
-  addPage(){
-    this.router.navigate(["/main/"+this.userid+"/add"]);
-  }
 }

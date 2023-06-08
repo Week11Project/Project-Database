@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/project';
 import { RestapiService } from 'src/app/services/restapi';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -29,8 +29,14 @@ export class AddComponent {
 
 
   
-  constructor(private restapiService: RestapiService, public snackBar: MatSnackBar, private route: ActivatedRoute) {
+  constructor(private restapiService: RestapiService, public snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) {
     this.userid = sessionStorage.getItem("userid");
+    
+    const headers = sessionStorage.getItem("headers");
+    
+    if(headers == null){
+      this.router.navigate(["/login"]);
+    }
 
     this.restapiService.findAll(this.userid).subscribe((data) => {
       const t : Set<string> = new Set<string>();
@@ -41,8 +47,9 @@ export class AddComponent {
     });
     const urlreg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
-    console.log(this.editid);
-    if(this.editid!==undefined){
+    this.editid = this.route.snapshot.paramMap.get('projectid');
+    
+    if(this.editid!==undefined&&this.editid!==null){
       this.editing =true;
       this.edit();
     }
@@ -95,12 +102,18 @@ export class AddComponent {
 
       if(this.editing){ 
             this.restapiService.update(this.projectForm.value, this.editid).subscribe({
-            next: (response) => this.openSnackBar("Project edit successfully"),
+            next: (response) => {
+              this.openSnackBar("Project edit successfully");
+              this.router.navigate(["/main/projects/"+this.userid]);
+          },
             error: (error) => this.openSnackBar("Project edit failed"),
           });
         } else {
           this.restapiService.save(this.projectForm.value).subscribe({
-            next: (response) => this.openSnackBar("Project posted successfully"),
+            next: (response) =>{ 
+              this.openSnackBar("Project posted successfully");
+              this.router.navigate(["/main/projects/"+this.userid]);
+          },
             error: (error) => this.openSnackBar("Project posted failed"),
           });
         }        

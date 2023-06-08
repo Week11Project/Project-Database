@@ -2,17 +2,17 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class User {
-    uid: number = 0;
+    user_id: number = 0;
     username: string = "";
     password: string ="";
     role: string="";
 
     set setid(id:number){
-        this.uid = id;
+        this.user_id = id;
     }
     
     get getid(){
-        return this.uid;
+        return this.user_id;
     }
 
 }

@@ -31,7 +31,7 @@ export class ProjectComponent implements OnInit {
     if (this.project.site!=null) {
       this.isSiteHidden = false;
     }
-    this.color=this.colorarr[parseInt(this.index)%3]
+    this.color=this.colorarr[parseInt(this.index)%3];
   }
 
   deleteProject(){
