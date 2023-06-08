@@ -11,11 +11,11 @@
                     <div class="col-4">
                         <app-filter
                         [tags]=tags
-                        (notify)="filterProjects($event)">
+                        (notify)="getFilterInput($event); filterProjects()">
                         </app-filter>
                     </div>
                         <div class="col-4 offset-4">
-                            <div class="input-group"><input class="form-control" type="text"  #search (keyup.enter)="searchProjects(search.value)" placeholder="Search"/><button class="btn btn-primary" type="button" (click)="searchProjects(search.value)"><i class="fa fa-search"></i></button></div>
+                            <div class="input-group"><input class="form-control" type="text" (keyup.enter)="searchProjects()" [(ngModel)]="searchVaule" placeholder="Search"/><button class="btn btn-primary" type="button" (click)="searchProjects()"><i class="fa fa-search"></i></button></div>
                         </div>
                     </div>
                     <div class="row justify-content-center">

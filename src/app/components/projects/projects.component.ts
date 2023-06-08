@@ -39,24 +39,32 @@ export class ProjectsComponent {
     }
   }
   
-  searchProjects(value: string) {
-    value=value.toLowerCase();
-    if (this.projects !== undefined) {
-      this.filteredProjects = [...this.projects.filter(project => (project.title !== undefined) && project.title.toLowerCase().includes(value) || (project.skills !== undefined) && project.skills.toLowerCase().includes(value) || (project.description !== undefined) && project.description.toLowerCase().includes(value))];
+  searchProjects() {
+    console.log(this.searchVaule.toLowerCase());
+    
+    const value = this.searchVaule.toLowerCase();
+    this.searchVaule = value;
+    if(this.filterVaule==""&&this.projects !== undefined){
+      this.filteredProjects = [...this.projects];
+    }
+
+    if (this.filteredProjects !== undefined&&this.filteredProjects !== null) {
+      this.filteredProjects = [...this.filteredProjects.filter(project => (project.title !== undefined&&project.title !== null) && project.title.toLowerCase().includes(value) || (project.skills !== undefined&&project.skills !== null) && project.skills.toLowerCase().includes(value) || (project.description !== undefined&&project.description !== null) && project.description.toLowerCase().includes(value))];
     }
   }
-  filterProjects(input: string) {
-    const values: string[] = input.split(",");
+  getFilterInput(input: string){
+    this.filterVaule = input; 
+  }
+  filterProjects() {
+    const values: string[] = this.filterVaule.split(",");
     
-    if (this.projects !== undefined) {
-        this.filteredProjects = [...this.projects];
+    if (this.filteredProjects !== undefined) {
+        // this.filteredProjects = [...this.projects];
       for (let value of values) {
         value=value.toLowerCase();
         this.filteredProjects = [...this.filteredProjects.filter(project => (project.skills !== undefined) && project.skills.toLowerCase().split(", ").includes(value))];
       }
-      if(input==""){
-        this.filteredProjects = [...this.projects];
-      }
+      this.searchProjects();
     }
   }
 }
