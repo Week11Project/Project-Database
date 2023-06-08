@@ -4,6 +4,7 @@ import {RestapiService} from '../../services/restapi';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {User} from '../../model/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
   
   passwordMatch: boolean = true;
 
-  constructor(private service: RestapiService, private router: Router, private formBuilder: FormBuilder){
+  constructor(private service: RestapiService, private router: Router, private formBuilder: FormBuilder,public snackBar: MatSnackBar){
     this.signupForm = new FormGroup({
         username: new FormControl(this.username, [Validators.required]),
         password: new FormControl(this.password, [Validators.required]),
@@ -57,11 +58,6 @@ export class SignupComponent implements OnInit {
   
   checkPassword(){
     this.passwordMatch = this.signupForm.value.password===this.signupForm.value.confirmPassword;
-    console.log(this.passwordMatch);
-    
-    // this.signupForm.controls['confirmPassword'].setErrors({'incorrect': !this.passwordMatch});
-    // this.signupForm.controls['password'].setErrors({'incorrect': !this.passwordMatch});
-    
   }
 
   addUser(){
@@ -74,21 +70,32 @@ export class SignupComponent implements OnInit {
         if(this.signupForm.controls['password'].value != ""){
           //In order for the service to work and actually save the values, I've got to have an subscribe
           let rep = this.service.addUser(this.signupForm.value);
-          rep.subscribe(y=>{
-            //This console.log(y) call is not necessary
-            console.log(y)
-          })
+          // rep.subscribe(y=>{
+          //   //This console.log(y) call is not necessary
+          //   console.log(y);
+          // });
+          rep.subscribe({
+            next: (response) => {
+              console.log(response);
+              this.openSnackBar("User added successfully");
+          },
+            error: (error) => this.openSnackBar("User added failed"),
+          });
 
           this.router.navigate(["login"]);
 
         }else{
-          console.log("Password required")
+          console.log("Password required");
         }
       }
     });
   }
 
-
+  openSnackBar(message: string) {
+    this.snackBar.open(message, "OK", {
+      duration: 2000,
+    });
+  }
 
     //this.service.getUser(this.signupForm.controls['username'].value)
   //  console.log(this.signupForm.controls['username'].value);
