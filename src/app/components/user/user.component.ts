@@ -18,11 +18,14 @@ export class UserComponent implements OnInit {
   colorarr : Array<string> = ["primary", "secondary", "info", "danger", "success", "warning"];
   color: string = "primary";
 
-  constructor(private restapiService: RestapiService,private router: Router) {
-  }
+  constructor(private restapiService: RestapiService,private router: Router) {}
 
   ngOnInit() {
     this.color=this.colorarr[parseInt(this.index)%3];
+    
+    if(this.user!==undefined){
+      this.user.username=this.titleCaseWord(this.user.username);
+    }
     
     if(this.user!==undefined){
       this.uid=this.user.user_id;
@@ -30,6 +33,10 @@ export class UserComponent implements OnInit {
           this.projects = data;
       });
     }
+  }
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
   }
 
 }

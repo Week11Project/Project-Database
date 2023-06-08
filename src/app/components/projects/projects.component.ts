@@ -39,9 +39,7 @@ export class ProjectsComponent {
     }
   }
   
-  searchProjects() {
-    console.log(this.searchVaule.toLowerCase());
-    
+  searchProjects() {    
     const value = this.searchVaule.toLowerCase();
     this.searchVaule = value;
     if(this.filterVaule==""&&this.projects !== undefined){
@@ -59,7 +57,6 @@ export class ProjectsComponent {
     const values: string[] = this.filterVaule.split(",");
     
     if (this.filteredProjects !== undefined) {
-        // this.filteredProjects = [...this.projects];
       for (let value of values) {
         value=value.toLowerCase();
         this.filteredProjects = [...this.filteredProjects.filter(project => (project.skills !== undefined) && project.skills.toLowerCase().split(", ").includes(value))];

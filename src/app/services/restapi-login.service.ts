@@ -38,7 +38,6 @@ export class RestapiLoginService {
     const usernameURL:string="http://localhost:9080/users/";
     const u:any = await this.http.get<User>(usernameURL+username, { headers: this.headers}).toPromise();
     uid = u.user_id.toString();
-    console.log(uid);
     return uid;
 
   }

@@ -24,7 +24,6 @@ export class UsersComponent {
 
     this.restapiService.findAllUsers().subscribe((data) => {
       this.users = data;
-      console.log(data);
       
       this.filteredUsers = [...this.users];
 
