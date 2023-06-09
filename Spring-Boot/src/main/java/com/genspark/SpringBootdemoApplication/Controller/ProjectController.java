@@ -58,10 +58,10 @@ public class ProjectController {
       return this.userService.getAllUsers();
     }
 
-//    @GetMapping("/users/{userID}")
-//    public Users getUserById(@PathVariable int userID){
-//      return this.userService.getUserById(userID);
-//    }
+    @GetMapping("/users/id/{userID}")
+    public Users getUserById(@PathVariable int userID){
+      return this.userService.getUserById(userID);
+    }
     @GetMapping("/users/{username}")
     public Users getUserByUsername(@PathVariable String username){
       //If there is no username present, the value return null

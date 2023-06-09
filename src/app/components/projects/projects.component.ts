@@ -12,6 +12,7 @@ export class ProjectsComponent {
   @Input() projects?: Project[];
   @Input() filteredProjects?: Project[];
   @Input() tags?: string[];
+  username!: string;
   searchVaule : string = "";
   filterVaule : string = "";
   admin : boolean = false;
@@ -23,6 +24,10 @@ export class ProjectsComponent {
     const routeid = this.route.snapshot.paramMap.get('userid');
     
     this.userid = sessionStorage.getItem("userid");
+    this.restapiService.getUserById(routeid).subscribe((data) => {
+      this.username=this.titleCaseWord(data.username);
+    });
+    
 
     this.restapiService.findAll(routeid).subscribe((data) => {
       const t : Set<string> = new Set<string>();
@@ -37,6 +42,11 @@ export class ProjectsComponent {
     if(this.userid==routeid){
       this.admin = true;
     }
+  }
+
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
   }
   
   searchProjects() {    

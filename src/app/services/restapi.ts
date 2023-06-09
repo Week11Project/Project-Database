@@ -45,8 +45,12 @@ export class RestapiService {
     return this.http.put(this.projectsUrl+"projects", project, { headers: this.headers});
   }
 
-  public getUser(user: String){
+  public getUser(user: string){
     return this.http.get<User>(this.projectsUrl+"users/"+user);
+  }
+
+  public getUserById(id: string | null | undefined){
+    return this.http.get<User>(this.projectsUrl+"users/id/"+id);
   }
   public addUser(user:User){
     user.role="NORMAL";

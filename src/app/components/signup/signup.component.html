@@ -46,8 +46,12 @@
                                     </div>
 
                                 </div>
+                                <div class="row mb-5">
+                                    <div class="col mb-3"><button class="btn btn-outline-primary d-block w-100" type="button" name ="login" id="login" value="login" routerLink="/login">Login</button></div>
+                                    <div class="col mb-3"><button class="btn btn-primary d-block w-100" type="submit" [disabled]="signupForm.invalid" >Sign up</button></div>
+                                </div>
 
-                                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit" [disabled]="signupForm.invalid" >Sign up</button></div>
+                                <div class="mb-3"><button class="btn btn-primary d-block w-100" routerLink="/home" >Back to Home</button></div>
                             </form>
                         </div>
                     </div>
