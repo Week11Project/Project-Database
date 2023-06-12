@@ -95,6 +95,12 @@ export class AddComponent {
       if(this.projectForm.value.skills instanceof Array){   
         this.projectForm.value.skills = skillsList(this.projectForm.value.skills);
       }
+      if(this.projectForm.value.github == ""){
+        this.projectForm.value.github=null;
+      }
+      if(this.projectForm.value.site == ""){
+        this.projectForm.value.site=null;
+      }
 
         this.projectForm.value.id= this.editid;
         this.projectForm.value.uid= this.userid;
